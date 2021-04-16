@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+
+<html>
+  <style>
+    html {
+      background-image: linear-gradient(
+        180deg,
+        #b2e563 0,
+        #92db5b 25%,
+        #6acc50 50%,
+        #35bd48 75%,
+        #00b247 100%
+      );
+      width: 1600px;
+      height: 150%;
+    }
+
+    svg {
+      box-shadow: 0px 0px 5px 1px black;
+      background-color: rgba(255, 255, 255, 0.5);
+    }
+
+    #x-axis,
+    #y-axis {
+      font-size: 12px;
+      fill: "white";
+    }
+
+    #tooltip {
+      position: absolute;
+      color: #f2f7f2;
+      background-color: rgba(0, 0, 0, 0.8);
+      box-shadow: 0px 0px 5px 1px black;
+      border-radius: 5;
+      width: auto;
+      height: auto;
+      padding: 5px;
+      font-size: 20px;
+    }
+
+    #bar:hover {
+      stroke-width: 2;
+      stroke: black;
+    }
+
+
+    #tooltip.hidden {
+      display: none;
+    }
+  </style>
+
+  <body id="main">
+    <title id="name">Monthly Global Land-Surface Temperature</title>
+    <h1 id="title">Monthly Global Land-Surface Temperature</h1>
+    <h3 id="description"></h3>
+    <h4 id="year-id"></h4>
+    <div></div>
+  </body>
+
+  <body>
+    <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="/heat.js"></script>
+  </body>
+</html>

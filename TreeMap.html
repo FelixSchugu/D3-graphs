@@ -1,0 +1,67 @@
+<html>
+  <body>
+    <title></title>
+    <h1 id="title">Most selled movies</h1>
+    <h3 id="description">Map of the most domestic box office movies</h3>
+    <svg id="legend">Probando</svg>
+    <svg id="map"></svg>
+
+    <div></div>
+  </body>
+
+  <body>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
+    <script
+      defer
+      src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"
+    ></script>
+    <script src="./tree.js"></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=PT+Sans&display=swap");
+      body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-family: "PT Sans", "monospace";
+
+        background-image: radial-gradient(
+          circle at 12.5% 12.5%,
+          #abff53 0,
+          #8bfe5a 16.67%,
+          #63fb62 33.33%,
+          #10f86c 50%,
+          #00f477 66.67%,
+          #00f185 83.33%,
+          #00ed94 100%
+        );
+      }
+
+      #map {
+        min-width: 1000px;
+        min-height: 600px;
+        box-shadow: 0px 0px 5px 1px black;
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+
+      #legend {
+        margin-top: 25px;
+        margin-bottom: 10px;
+        width: 900px;
+        height: 50px;
+
+        box-shadow: 0px 0px 5px 1px black;
+        background-color: rgba(255, 255, 255, 0.5);
+      }
+
+      #tooltip {
+        padding: 5px;
+        position: absolute;
+        box-shadow: 0px 0px 5px 1px black;
+        background-color: rgba(255, 255, 255, 0.8);
+      }
+    </style>
+  </body>
+</html>

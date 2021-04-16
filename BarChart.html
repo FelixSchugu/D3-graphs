@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://d3js.org/d3-fetch.v2.min.js"></script>
+  </head>
+
+  <body id="main">
+    <title id="title">GDP</title>
+    <h1>US Gross Domestic Product</h1>
+    <div id="graph"></div>
+    <div></div>
+  </body>
+
+  <body>
+    <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+    <script>
+      fetch(
+        "https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/master/GDP-data.json"
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          var val = [];
+          var dat = [];
+
+          Object.values(data.data).forEach((e, i) => {
+            dat.push(e[0]);
+            val.push(e[1]);
+          });
+
+          init(val, dat);
+        });
+
+      function init(values, dates) {
+
+        const h = 600;
+        const w = 900;
+        const padding = 30;
+
+        var years = dates.map((d) => new Date(d));
+
+        var valuesObj = {};
+        values.forEach((d, i) => (valuesObj[d] = dates[i]));
+
+        var max = new Date(d3.max(years));
+        max.setMonth(max.getMonth() + 3);
+
+        const xScale = d3
+          .scaleTime()
+          .domain([d3.min(years), max])
+          .range([padding, w - 45]);
+
+        const yScale = d3
+          .scaleLinear()
+          .domain([0, d3.max(values, (d) => d)])
+          .range([h - padding, padding]);
+
+        const xAxis = d3.axisBottom(xScale);
+        const yAxis = d3.axisLeft(yScale);
+
+        const tr = d3.transition().duration(1000);
+
+        var tooltip = d3
+          .select("div")
+          .append("div")
+          .attr("class", "tooltip")
+          .attr("id", "tooltip")
+          .style("opacity", "0");
+
+        const svg = d3
+          .select("body")
+          .append("svg")
+          .attr("width", w)
+          .attr("height", h);
+
+        svg
+          .append("g")
+          .attr("transform", "translate(" + 15 + "," + (h - padding) + ")")
+          .attr("id", "x-axis")
+          .call(xAxis);
+
+        svg
+          .append("g")
+          .attr("transform", "translate(" + (padding + 15) + ",0)")
+          .attr("id", "y-axis")
+          .call(yAxis);
+
+        const rect = svg
+          .selectAll("rect")
+          .data(values)
+          .enter()
+          .append("rect")
+          .attr("class", "bar")
+          .attr("data-date", (d, i) => dates[i])
+          .attr("data-gdp", (d, i) => values[i])
+          .style("pointer-events", "all");
+
+        rect
+          .on("mouseover", (d, i) => {
+            let year = new Date(valuesObj[i]).getFullYear();
+            let month = new Date(valuesObj[i]).getMonth();
+            let day = new Date(valuesObj[i]).getDay();
+
+            tooltip.transition().duration(100).style("opacity", "1");
+            tooltip
+              .html(
+                "Date: " +
+                  month +
+                  "/" +
+                  day +
+                  "/" +
+                  year +
+                  "<br>" +
+                  " GDP: $" +
+                  i +
+                  " Billions"
+              )
+              .style("left", d.clientX - 120 + "px")
+              .style("top", d.clientY - 60 + "px")
+              .attr("data-date", valuesObj[i]);
+          })
+          .on("mouseout", (d, i) => {
+            tooltip.transition().duration(100).style("opacity", "0");
+            tooltip.exit();
+          });
+
+        rect
+          .attr("width", 2)
+          .attr("x", (d, i) => {
+            return (i + 15) * 3;
+          })
+          .attr("y", 570)
+          .transition()
+          .duration(1000)
+          .attr("height", (d, i) => {
+            return 3 * (d / 100);
+          })
+          .attr("y", (d, i) => {
+            return h - 30 - 3 * (d / 100);
+          });
+      }
+    </script>
+  </body>
+</html>

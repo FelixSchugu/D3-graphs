@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+
+<html>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@500&display=swap');
+
+    html{
+        font-family: "Lexend", "monospace";
+    }
+
+    #main {
+      background-image: radial-gradient(
+        circle at 87.5% 12.5%,
+        #ff8144 0,
+        #ff7248 12.5%,
+        #ff624d 25%,
+        #ff4f52 37.5%,
+        #ff3858 50%,
+        #fb145f 62.5%,
+        #f50068 75%,
+        #ef0073 87.5%,
+        #e6007f 100%
+      );
+
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    svg {
+      box-shadow: 0px 0px 5px 1px black;
+      background-color: rgba(13, 10, 11, 0.8);
+    }
+    .dot, rect{
+        stroke: black;
+        stroke-width: 2;
+    }
+
+    .x-a path,
+    .y-a path,
+    .x-a line,
+    .y-a line,
+    .x-a text,
+    .y-a text {
+      stroke: gray;
+    }
+
+    .x-a text {
+      font-size: 15px;
+    }
+
+    #tooltip {
+      position: absolute;
+      color: #f2f7f2;
+      background-color: rgba(0, 0, 0, 0.8);
+      box-shadow: 0px 0px 5px 1px black;
+      border-radius: 5;
+      width: auto;
+      height: auto;
+      padding: 5px;
+      font-size: 12px;
+    }
+  </style>
+
+  <body id="main">
+      <title>Scatterplot Graph</title>
+      <h1 id="title">Doping in Professional Bicycle Racing</h3>
+      <h2>35 Fastest times up Alpe d'Huez</h2>
+      <div></div>
+  </body>
+
+  <body>
+    <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="./scatter.js"></script>
+  </body>
+</html>

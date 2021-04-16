@@ -1,0 +1,43 @@
+<html>
+  <style>
+    html,
+    body {
+      min-height: 100%;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    svg {
+      background-color: whitesmoke;
+    }
+
+    #canvas {
+      min-width: 100%;
+      min-height: 600px;
+    }
+  </style>
+  <head>
+    <script></script>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"
+      integrity="sha512-4UKI/XKm3xrvJ6pZS5oTRvIQGIzZFoXR71rRBb1y2N+PbwAsKa5tPl2J6WvbEvwN3TxQCm8hMzsl/pO+82iRlg=="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <h1 id="title">Educational Attainment</h1>
+    <h3 id="description">Lorem ipsum</h3>
+    <svg id="canvas"></svg>
+  </body>
+  <script defer src="./scriptCM.js"></script>
+  <script defer src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+</html>

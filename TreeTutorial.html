@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <title>Treemap Diagram</title>
+  </head>
+  <body>
+    <h1 id="title">Most selled movies</h1>
+    <h3 id="description">Lorem ipsum</h3>
+    <svg id="canvas"></svg>
+  </body>
+  <style>
+    html,
+    body {
+      min-height: 100%;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    svg {
+      background-color: whitesmoke;
+    }
+
+    #canvas {
+      min-width: 1000px;
+      min-height: 600px;
+    }
+  </style>
+  <script
+    defer
+    src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"
+  ></script>
+  <script>
+    const movieDataURL =
+      "https://cdn.freecodecamp.org/testable-projects-fcc/data/tree_map/movie-data.json";
+
+    let movieData;
+
+    let canvas = d3.select("#canvas");
+
+    const drawTreeMap = () => {
+      console.log("all right!", movieData);
+
+      let hierarchy = d3
+        .hierarchy(movieData, (node) => {
+          return node["children"];
+        })
+        .sum((node) => {
+          return node["value"];
+        })
+        .sort((node1, node2) => {
+          return node2["value"] - node1["value"];
+        });
+
+      let createTreeMap = d3.treemap().size([1000, 600]).padding(2);
+
+      createTreeMap(hierarchy);
+
+      let movieTiles = hierarchy.leaves();
+      console.log(movieTiles);
+      let block = canvas
+        .selectAll("g")
+        .data(movieTiles)
+        .enter()
+        .append("g")
+        .attr("transform", (movie) => {
+          return "translate(" + movie["x0"] + "," + movie["y0"] + ")";
+        });
+
+      block
+        .append("rect")
+        .attr("class", "tile")
+        .attr("fill", (movie) => {
+          let category = movie["data"]["category"];
+
+          if (category === "Action") {
+            return "orange";
+          } else if (category === "Drama") {
+            return "lightgreen";
+          } else if (category === "Adventure") {
+            return "coral";
+          } else if (category === "Family") {
+            return "lightblue";
+          } else if (category === "Animation") {
+            return "pink";
+          } else if (category === "Comedy") {
+            return "khaki";
+          } else if (category === "Biography") {
+            return "tan";
+          }
+        })
+        .attr("data-name", (movie) => {
+          return movie["data"]["name"];
+        })
+        .attr("data-category", (movie) => {
+          return movie["data"]["category"];
+        })
+        .attr("data-value", (movie) => {
+          return movie["data"]["value"];
+        })
+        .attr("width", (movie) => {
+          return movie["x1"] - movie["x0"];
+        })
+        .attr("height", (movie) => {
+          return movie["y1"] - movie["y0"];
+        });
+    };
+
+    d3.json(movieDataURL).then((data, error) => {
+      if (error) {
+        console.log("impossible to connect ");
+      } else {
+        movieData = data;
+        drawTreeMap();
+      }
+    });
+  </script>
+</html>
